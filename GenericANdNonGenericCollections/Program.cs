@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;//ArrayList,Hashtable
-using System.Collections.Generic;//List,
+using System.Collections.Generic;//List,Dictionary
+using System.Linq;//ElementAt
 
 namespace GenericANdNonGenericCollections
 {
@@ -51,12 +52,9 @@ namespace GenericANdNonGenericCollections
             Console.WriteLine("\n" + sum);
 
 
-
-            Console.ReadKey();
-
             //-------------------------------------------------------------------------------------------Lists
 
-            //-------------------------------------------------------------------------------------------HashTables
+            //-------------------------------------------------------------------------------------------HashTables (any type key, any type value)
             Hashtable studentsTable = new Hashtable();
 
             Student stud1 = new(1, "Maria", 98);
@@ -90,25 +88,57 @@ namespace GenericANdNonGenericCollections
                 Console.WriteLine("2) id:{0}, name:{1}, GPA: {2}", student.Id, student.Name, student.GPA);
             }
 
-        }
+            //-------------------------------------------------------------------------------------------Dictionaries generic type of hashtable (specified type key - specified type value)
+            Dictionary<int, string> myDictionary = new Dictionary<int, string>() { { 1, "one" }, { 2, "two" }, { 3, "three" } };
 
-        // key - value -> they can be a different type
-        class Student
-        {
-            //constructor
-            public Student(int id, string name, float GPA)
+            Employee[] employees = {
+            new Employee("sales assistant", "John", 24, 14.32f),
+            new Employee("secretary", "Amy", 45, 11.90f),
+            new Employee("CEO", "Ben", 36, 18f),
+            new Employee("manager", "James", 40, 14.44f),
+            new Employee("cleaner", "Olga", 58, 12.32f),
+            };
+
+            Dictionary<string, Employee> employeesDirectory = new Dictionary<string, Employee>();
+
+            foreach (Employee emp in employees)
             {
-                this.Id = id;
-                this.Name = name;
-                this.GPA = GPA;
+                employeesDirectory.Add(emp.Role, emp);
+                Console.WriteLine("person {0} added", emp.Name);
             }
 
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public float GPA { get; set; }
+            //search base on value
+            string search = "CEO";
+            if (employeesDirectory.ContainsKey(search))
+            //we can use TryGetValue() - works the same as TryParse()
+            {
+                Employee empl = employeesDirectory[search];
+                Console.WriteLine(empl.Name);
+            }
+            else
+            {
+                Console.WriteLine("{0} wasn't found!", search);
+            }
+
+            Console.WriteLine("\n");
+            //search based on index
+            //internally the key will always be a number(index) so we can do:
+            for (int i = 0; i < employeesDirectory.Count; i++)
+            {
+                KeyValuePair<string, Employee> keyValuePair = employeesDirectory.ElementAt(i); //returns key-value pair at index i
+                Console.WriteLine("Key {0}", keyValuePair.Key); // writing index
+                //writing value
+                Employee employeeValue = keyValuePair.Value;
+                Console.WriteLine("name: {0},role: {1},age: {2}, rate: {3}, salary: {4}", employeeValue.Name, employeeValue.Age, employeeValue.Role, employeeValue.Rate, employeeValue.Salary);
+            }
+
 
 
         }
+
+
+
+
 
     }
 }
