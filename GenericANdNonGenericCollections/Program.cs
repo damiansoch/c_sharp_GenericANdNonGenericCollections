@@ -107,7 +107,7 @@ namespace GenericANdNonGenericCollections
                 Console.WriteLine("person {0} added", emp.Name);
             }
 
-            //search base on value
+            //------------------------------------------------------------search base on value
             string search = "CEO";
             if (employeesDirectory.ContainsKey(search))
             //we can use TryGetValue() - works the same as TryParse()
@@ -121,7 +121,32 @@ namespace GenericANdNonGenericCollections
             }
 
             Console.WriteLine("\n");
-            //search based on index
+
+            //-------------------------------------------------------------adding and removing from dictionary
+            //updating
+            string keyToUpdate = "CEO";
+            if (employeesDirectory.ContainsKey(keyToUpdate))
+            {
+                employeesDirectory[keyToUpdate] = new Employee("HR", "Bogdan", 26, 11);
+            }
+            else
+            {
+                Console.WriteLine("{0} not found", keyToUpdate);
+            }
+            //removing
+            string keyToRemove = "cleaner";
+            if (employeesDirectory.Remove(keyToRemove))//we can do it like this because it returns a bool
+            {
+                Console.WriteLine("item removed");
+            }
+            else
+            {
+                Console.WriteLine("{0} not found", keyToRemove);
+            }
+            //add
+            employeesDirectory.Add(, new Employee("cleaner", "Bogumila", 78, 5));
+
+            //-------------------------------------------------------------search based on index
             //internally the key will always be a number(index) so we can do:
             for (int i = 0; i < employeesDirectory.Count; i++)
             {
@@ -131,8 +156,6 @@ namespace GenericANdNonGenericCollections
                 Employee employeeValue = keyValuePair.Value;
                 Console.WriteLine("name: {0},role: {1},age: {2}, rate: {3}, salary: {4}, is @ index:{5}", employeeValue.Name, employeeValue.Age, employeeValue.Role, employeeValue.Rate, employeeValue.Salary, i);
             }
-
-
 
         }
 
