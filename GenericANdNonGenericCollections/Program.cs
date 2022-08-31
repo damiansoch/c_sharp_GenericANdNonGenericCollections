@@ -129,7 +129,7 @@ namespace GenericANdNonGenericCollections
                 Console.WriteLine("Key {0}", keyValuePair.Key); // writing index
                 //writing value
                 Employee employeeValue = keyValuePair.Value;
-                Console.WriteLine("name: {0},role: {1},age: {2}, rate: {3}, salary: {4}", employeeValue.Name, employeeValue.Age, employeeValue.Role, employeeValue.Rate, employeeValue.Salary);
+                Console.WriteLine("name: {0},role: {1},age: {2}, rate: {3}, salary: {4}, is @ index:{5}", employeeValue.Name, employeeValue.Age, employeeValue.Role, employeeValue.Rate, employeeValue.Salary, i);
             }
 
 
